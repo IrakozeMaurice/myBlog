@@ -6,21 +6,7 @@
         <a href="/posts/create" class="btn btn-primary" style="float: right;">New post</a>
         <h1>Posts</h1>
         <hr>
-        @if (session('message') == 'post created')
-            <div class="alert alert-primary">
-                {{ session('message') }}
-            </div>
-        @endif
-        @if (session('message') == 'post updated')
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
-        @if (session('message') == 'post deleted')
-            <div class="alert alert-danger">
-                {{ session('message') }}
-            </div>
-        @endif
+        @include('partials.messages')
         @foreach ($posts as $post)
             <div class="row">
                 <div class="col-lg-2">
@@ -35,7 +21,7 @@
                     <form action="/posts/{{ $post->id }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <a href="#"><button class="btn btn-danger">Delete</button></a>
+                        <input type="submit" value="Delete" class="btn btn-danger">
                     </form>
                 </div>
             </div>

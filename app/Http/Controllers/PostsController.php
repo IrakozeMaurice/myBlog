@@ -18,19 +18,18 @@ class PostsController extends Controller
         return view('backend.posts.index', compact('posts'));
     }
 
-    public function create(Post $post)
+    public function create()
     {
-        return view('backend.posts.create', compact('post'));
+        return view('backend.posts.create');
     }
 
     public function store()
     {
-        // dd(request());
         $attributes = $this->validatePost();
         $attributes['category_id'] = request('category_id');
         $attributes['user_id'] = auth()->id();
-        $post = Post::create($attributes);
-        return redirect('/posts')->with('message', 'post created');
+        Post::create($attributes);
+        return redirect('/posts')->with('message', 'created');
     }
 
     public function show(Post $post)
@@ -47,13 +46,13 @@ class PostsController extends Controller
     {
         $post->update($this->validatePost());
 
-        return redirect('/posts')->with('message', 'post updated');
+        return redirect('/posts')->with('message', 'updated');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/posts')->with('message', 'post deleted');
+        return redirect('/posts')->with('message', 'deleted');
     }
 
     protected function validatePost()
