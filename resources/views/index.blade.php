@@ -2,19 +2,20 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            @include('partials.sidenav')
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
+
+                        @if (auth()->user()->is_admin == 1)
+                            You are logged in as admin
+                        @else
+                            You are logged in as normal user
                         @endif
 
-                        You are logged in as normal user
                     </div>
                 </div>
                 @if (session('error'))
