@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -25,6 +21,7 @@ class PostsController extends Controller
 
     public function store()
     {
+
         $attributes = $this->validatePost();
         $attributes['category_id'] = request('category_id');
         $attributes['user_id'] = auth()->id();
@@ -45,6 +42,8 @@ class PostsController extends Controller
     public function update(Post $post)
     {
         $post->update($this->validatePost());
+        $attributes['user_id'] = auth()->id();
+        $post->update($attributes);
 
         return redirect('/posts')->with('message', 'updated');
     }

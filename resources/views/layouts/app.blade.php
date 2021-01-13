@@ -38,8 +38,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="#">home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">sports</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">education</a></li>
+                        @foreach ($categories = getCategories() as $category)
+                            <li class="nav-item"><a class="nav-link" href="#">{{ $category['name'] }}</a></li>
+                        @endforeach
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -64,7 +65,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

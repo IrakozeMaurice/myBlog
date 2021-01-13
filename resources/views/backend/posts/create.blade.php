@@ -6,10 +6,11 @@
             <form action="/posts" method="POST">
                 @csrf
                 <div>
+                    <label>Select category</label>
                     <select name="category_id" class="form-control">
-                        <option>Select category</option>
-                        <option value="1">Sports</option>
-                        <option value="2">Education</option>
+                        @foreach ($categories = getCategories() as $category)
+                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <br>
