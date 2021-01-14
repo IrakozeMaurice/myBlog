@@ -23,6 +23,9 @@
                         {{ session('error') }}
                     </div>
                 @endif
+                <div class="jumbotron">
+                    user profile here
+                </div>
             </div>
         </div>
     </div>

@@ -10,13 +10,12 @@
         @foreach ($posts as $post)
             <div class="row">
                 <div class="col-lg-2">
-                    <img src="" alt="post image">
+                    <img class="img-fluid img-thumbnail" src="/storage/cover_images/{{ $post->post_image }}"
+                        alt="post image">
                 </div>
                 <div class="col-lg-8">
                     <h2><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h2>
-                    <p>{{ $post->description }}</p>
-                </div>
-                <div class="col-lg-2 text-center my-auto">
+                    <p>{{ $post->description }}</p><br>
                     <a href="/posts/{{ $post->id }}/edit"><button class="btn btn-success">Edit</button></a>
                     <form action="/posts/{{ $post->id }}" method="POST" style="display: inline;">
                         @csrf
