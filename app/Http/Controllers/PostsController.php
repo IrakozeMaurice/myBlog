@@ -10,7 +10,12 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        if (auth()->user()->is_admin == 1) {
+            $posts = Post::all();
+        } else {
+            $posts = Post::where('user_id', auth()->id())->get();
+        }
+
         return view('backend.posts.index', compact('posts'));
     }
 
@@ -31,6 +36,8 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
+        abort_unless($post->user_id == auth()->id(), 403, 'You are not authorized to view this page');
+
         return view('backend.posts.show', compact('post'));
     }
 
