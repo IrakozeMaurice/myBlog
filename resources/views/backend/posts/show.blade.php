@@ -7,7 +7,7 @@
                 <img class="img-fluid img-thumbnail" src="/storage/cover_images/{{ $post->post_image }}" alt="post image">
             </div>
             <div class="col-lg-6">
-                <h1>{{ $post->title }}</h1>
+                <h2>{{ $post->title }}</h2>
                 <p>{{ $post->description }}</p>
                 <br>
                 <a href="/posts/{{ $post->id }}/edit"><button class="btn btn-success">Edit</button></a>

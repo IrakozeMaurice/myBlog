@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -53,7 +54,30 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'avatar' => ['image', 'nullable', 'max:1999'],
         ]);
+    }
+
+    /*
+        handle profile picture upload
+    */
+    protected function handleFileUpload()
+    {
+        if (request()->hasFile('avatar')) {
+            //get filename with extension
+            $filenameWithExt = request()->file('avatar')->getClientOriginalName();
+            //get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just extension
+            $extension = request()->file('avatar')->getClientOriginalExtension();
+            //filename to store
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+            //upload image
+            $path = request()->file('avatar')->storeAs('public/profile_pictures', $filenameToStore);
+        } else {
+            $filenameToStore = 'default_avatar' . time() . '.' . 'jpg';
+        }
+        return $filenameToStore;
     }
 
     /**
@@ -68,6 +92,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $this->handleFileUpload(),
         ]);
     }
 }

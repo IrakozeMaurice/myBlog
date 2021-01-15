@@ -89,7 +89,7 @@ class PostsController extends Controller
             //upload image
             $path = $request->file('post_image')->storeAs('public/cover_images', $filenameToStore);
         } else {
-            $filenameToStore = 'default_cover_' . time() . '.' . 'jpg';
+            $filenameToStore = 'default_cover.jpg';
         }
         return $filenameToStore;
     }
