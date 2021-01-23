@@ -37,7 +37,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        abort_unless($post->user_id == auth()->id(), 403, 'You are not authorized to view this page');
+        abort_unless($post->user_id == auth()->id() || auth()->user()->is_admin == 1, 403, 'You are not authorized to view this page');
 
         return view('backend.posts.show', compact('post'));
     }
