@@ -9,7 +9,7 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('updated_at', 'desc')->get();
         return view('frontend.home', compact('posts'));
     }
 
@@ -20,7 +20,7 @@ class HomepageController extends Controller
 
     public function showByCategory($id)
     {
-        $posts = Post::where('category_id', $id)->get();
+        $posts = Post::where('category_id', $id)->orderBy('updated_at', 'desc')->get();
         return view('frontend.home', compact('posts'));
     }
 }

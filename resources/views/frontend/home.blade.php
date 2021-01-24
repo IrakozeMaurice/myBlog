@@ -11,11 +11,11 @@
                         </div>
                         <div class="col-lg-10">
                             <h2><a href="/{{ $post->id }}">{{ $post->title }}</a></h2>
-                            <p><b>Posted:</b> {{ $post->created_at->diffForHumans() }}
+                            <p><b>Posted:</b> {{ $post->updated_at->diffForHumans() }}
                                 by: {{ $post->writer->name }}</p>
                             <p><b>Category:</b> {{ $post->category->name }}</p>
-                            <p>{{ substr($post->description, 0, 220) }}</p>
-                            <a href="{{ $post->id }}">Continue reading &gt;</a>
+                            <p>{{ substr($post->description, 0, 220) }} ...</p>
+                            <a href="{{ $post->id }}">Continue reading &gt;&gt;</a>
                         </div>
                     </div>
                     <hr>
