@@ -17,4 +17,10 @@ class HomepageController extends Controller
     {
         return view('frontend.show', compact('post'));
     }
+
+    public function showByCategory($id)
+    {
+        $posts = Post::where('category_id', $id)->get();
+        return view('frontend.home', compact('posts'));
+    }
 }

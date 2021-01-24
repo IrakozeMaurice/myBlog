@@ -12,4 +12,6 @@ Auth::routes();
 
 Route::get('/', 'HomepageController@index');
 
-Route::get('{post}', 'HomepageController@show');
+Route::get('/{post}', 'HomepageController@show');
+
+Route::get('/category/{category}', 'HomepageController@showByCategory');
